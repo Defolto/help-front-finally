@@ -1,4 +1,4 @@
-export type IUser = {
+export type ICandidate = {
    login: string
    email: string
    password: string

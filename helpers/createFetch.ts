@@ -19,9 +19,7 @@ export async function createFetch(api: ALL_API, data: any): Promise<IDataFetch> 
       }),
    }).then((res) => {
       if (res.status !== 200) {
-         return {
-            error: 'Общий сбой, попробуйте позже',
-         }
+         throw new Error('Общий сбой')
       }
 
       return res.json() as IDataFetch

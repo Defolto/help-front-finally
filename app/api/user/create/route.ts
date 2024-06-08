@@ -1,6 +1,6 @@
-import { closeDB, createData, createError, openDB } from '@/mongoDB/general'
-import { User } from '@/mongoDB/models/user'
-import { IUser } from '@/types'
+import { closeDB, createData, openDB } from '@/mongoDB/general'
+import { Candidate } from '@/mongoDB/models/candidate'
+import { ICandidate } from '@/types'
 
 type IUserCreated = {
    name: string
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
    try {
       await openDB()
 
-      const user: IUser = {
+      const candidate: ICandidate = {
          login,
          email,
          password,
@@ -26,13 +26,12 @@ export async function POST(req: Request) {
          },
       }
 
-      const newUser = new User(user)
+      const newUser = new Candidate(candidate)
       await newUser.save()
 
       await closeDB()
-      return Response.json(createData(user))
+      return Response.json(createData(newUser.get('_id')))
    } catch (e) {
-      console.log(e)
-      return Response.json(createError('Ошибка регистрации'))
+      console.log('Ошибка регистрации', e)
    }
 }

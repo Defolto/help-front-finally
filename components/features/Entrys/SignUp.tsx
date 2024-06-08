@@ -1,14 +1,17 @@
 import { formatName, IDataUser, isValidDataUser } from '@/components/features/Entrys/EntryFunctions'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
+import { getCookie, setCookie } from '@/helpers/cookie'
 import { createFetch } from '@/helpers/createFetch'
-import { FormEvent } from 'react'
+import { FormEvent, useState } from 'react'
 
 /**
  * Компонент регистрации
  */
 export default function SignUp() {
-   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+   const [isConfirmation, setIsConfirmation] = useState<boolean>(false)
+
+   const trySignUp = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
 
       const formData = new FormData(e.currentTarget)
@@ -23,9 +26,31 @@ export default function SignUp() {
          return false
       }
 
-      createFetch('api/user/create', user).then((res) => {
-         console.log(res)
-      })
+      createFetch('api/user/create', user)
+         .then((res) => {
+            setIsConfirmation(true)
+            setCookie('interim_id', res.data)
+         })
+         .catch((e) => {
+            console.log(e)
+         })
+   }
+
+   const confirmCode = (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+
+      const formData = new FormData(e.currentTarget)
+      const code = formData.get('code')
+      const id = getCookie('interim_id')
+      console.log(id)
+
+      createFetch('api/user/confirm', { id: getCookie('interim_id'), code })
+         .then((res) => {
+            console.log(res.data)
+         })
+         .catch((e) => {
+            console.log(e)
+         })
    }
 
    const handleChangeName = (e: any) => {
@@ -34,38 +59,47 @@ export default function SignUp() {
 
    return (
       <>
-         <form className="flex flex-col gap-3" id="fgds" onSubmit={onSubmit}>
-            <div className="flex flex-row">
+         {!isConfirmation ? (
+            <form className="flex flex-col gap-3" id="fgds" onSubmit={trySignUp}>
+               <div className="flex flex-row">
+                  <Input
+                     view="entry"
+                     className="mr-2.5 !w-[140px]"
+                     type="text"
+                     placeholder="Имя"
+                     name="name"
+                     onChange={handleChangeName}
+                  />
+                  <Input
+                     view="entry"
+                     className="ml-2.5 !w-[140px]"
+                     type="text"
+                     placeholder="Фамилия"
+                     name="surname"
+                     onChange={handleChangeName}
+                  />
+               </div>
+               <Input view="entry" type="text" placeholder="Почта" name="email" />
+               <Input view="entry" type="text" placeholder="Логин" name="login" />
+               <Input view="entry" type="password" placeholder="Пароль" name="password" />
                <Input
                   view="entry"
-                  className="mr-2.5 !w-[140px]"
-                  type="text"
-                  placeholder="Имя"
-                  name="name"
-                  onChange={handleChangeName}
+                  type="password"
+                  placeholder="Повторите пароль"
+                  name="retryPassword"
                />
-               <Input
-                  view="entry"
-                  className="ml-2.5 !w-[140px]"
-                  type="text"
-                  placeholder="Фамилия"
-                  name="surname"
-                  onChange={handleChangeName}
-               />
-            </div>
-            <Input view="entry" type="text" placeholder="Почта" name="email" />
-            <Input view="entry" type="text" placeholder="Логин" name="login" />
-            <Input view="entry" type="password" placeholder="Пароль" name="password" />
-            <Input
-               view="entry"
-               type="password"
-               placeholder="Повторите пароль"
-               name="retryPassword"
-            />
-            <Button className="mx-auto px-10" type="submit">
-               Вход
-            </Button>
-         </form>
+               <Button className="mx-auto mt-3 px-10" type="submit">
+                  Регистрация
+               </Button>
+            </form>
+         ) : (
+            <form className="flex flex-col" onSubmit={confirmCode}>
+               <Input view="entry" type="number" placeholder="Код с почты" name="code" />
+               <Button className="mx-auto mt-3 px-10" type="submit">
+                  Подтвердить
+               </Button>
+            </form>
+         )}
       </>
    )
 }

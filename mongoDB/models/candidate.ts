@@ -8,7 +8,7 @@ import {
 } from '@/helpers/constants'
 import mongoose, { Schema } from 'mongoose'
 
-const userScheme = new Schema(
+const candidateScheme = new Schema(
    {
       login: {
          type: String,
@@ -23,9 +23,21 @@ const userScheme = new Schema(
          validate: (text: string) => REG_EXP_EMAIL.test(text),
       },
       password: {
-         type: Number,
+         type: String,
          required: true,
          minLength: MIN_LENGTH_PASSWORD,
+      },
+      confirmCode: {
+         type: String,
+         required: true,
+         default: () => {
+            let code = ''
+            for (let i = 0; i < 4; i++) {
+               code += i
+            }
+
+            return code
+         },
       },
       info: {
          name: {
@@ -57,11 +69,10 @@ const userScheme = new Schema(
 )
 
 // Настройка опций, чтобы поле идентификатора называлось 'id' вместо '_id'
-userScheme.set('toJSON', {
+candidateScheme.set('toJSON', {
    transform: function (doc, ret) {
       ret.id = ret._id
       delete ret._id
    },
 })
-
-export const User = mongoose.model('User', userScheme)
+export const Candidate = mongoose.model('Candidate', candidateScheme)
