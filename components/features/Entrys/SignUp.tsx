@@ -1,9 +1,9 @@
-import { formatName, IDataUser, isValidDataUser } from '@/components/features/Entrys/EntryFunctions'
-import { Button } from '@/components/ui/Button'
-import { Input } from '@/components/ui/Input'
-import { getCookie, setCookie } from '@/helpers/cookie'
-import { createFetch } from '@/helpers/createFetch'
 import { FormEvent, useState } from 'react'
+import { getCookie, setCookie } from '../../../helpers/cookie'
+import { createFetch } from '../../../helpers/createFetch'
+import { Button } from '../../ui/Button'
+import { Input } from '../../ui/Input'
+import { IDataUser, formatName, isValidDataUser } from './EntryFunctions'
 
 /**
  * Компонент регистрации

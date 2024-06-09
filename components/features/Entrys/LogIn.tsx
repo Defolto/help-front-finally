@@ -1,7 +1,7 @@
-import { Button } from '@/components/ui/Button'
-import { Input } from '@/components/ui/Input'
-import { createFetch } from '@/helpers/createFetch'
 import { FormEvent } from 'react'
+import { createFetch } from '../../../helpers/createFetch'
+import { Button } from '../../ui/Button'
+import { Input } from '../../ui/Input'
 
 /**
  * Компонент входа

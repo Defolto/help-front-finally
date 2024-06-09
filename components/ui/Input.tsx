@@ -1,6 +1,6 @@
-import Eye from '@/components/icons/Eye'
 import clsx from 'clsx'
 import { forwardRef, useState } from 'react'
+import Eye from '../icons/Eye'
 
 type Props = {
    view?: 'entry'

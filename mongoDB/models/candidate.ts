@@ -1,3 +1,4 @@
+import mongoose, { Schema } from 'mongoose'
 import {
    MAX_LENGTH_LOGIN,
    MIN_LENGTH_LOGIN,
@@ -5,8 +6,7 @@ import {
    REG_EXP_EMAIL,
    REG_EXP_LOGIN,
    REG_EXP_RUS_WORD,
-} from '@/helpers/constants'
-import mongoose, { Schema } from 'mongoose'
+} from '../../helpers/constants'
 
 const candidateScheme = new Schema(
    {

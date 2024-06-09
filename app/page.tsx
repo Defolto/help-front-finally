@@ -1,5 +1,5 @@
-import Entry from '@/components/features/Entrys/Entry'
-import MainAnimation from '@/components/features/MainAnimation/MainAnimation'
+import Entry from '../components/features/Entrys/Entry'
+import MainAnimation from '../components/features/MainAnimation/MainAnimation'
 
 export default function Home() {
    return (
