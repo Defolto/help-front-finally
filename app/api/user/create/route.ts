@@ -1,5 +1,5 @@
 import { closeDB, createData, openDB } from '@/mongoDB/general'
-import { Candidate } from '@/mongoDB/models/candidate'
+import Candidate from '@/mongoDB/models/candidate'
 import { ICandidate } from '@/types'
 
 type IUserCreated = {

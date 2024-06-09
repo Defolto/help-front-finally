@@ -75,4 +75,6 @@ candidateScheme.set('toJSON', {
       delete ret._id
    },
 })
-export const Candidate = mongoose.model('Candidate', candidateScheme)
+
+const Candidate = mongoose.models.Candidate || mongoose.model('Candidate', candidateScheme)
+export default Candidate
