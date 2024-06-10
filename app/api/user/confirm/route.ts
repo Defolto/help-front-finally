@@ -15,7 +15,7 @@ export async function POST(req: Request) {
       const candidate = await Candidate.findOne({ _id: id })
 
       await closeDB()
-      return Response.json(createData(candidate))
+      return Response.json(createData(candidate.get('_id')))
    } catch (e) {
       console.log('Ошибка регистрации', e)
    }

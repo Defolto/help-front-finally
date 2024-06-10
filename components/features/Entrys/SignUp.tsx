@@ -1,5 +1,6 @@
+import { useRouter } from 'next/navigation'
 import { FormEvent, useState } from 'react'
-import { getCookie, setCookie } from '../../../helpers/cookie'
+import { deleteCookie, getCookie, setCookie } from '../../../helpers/cookie'
 import { createFetch } from '../../../helpers/createFetch'
 import { Button } from '../../ui/Button'
 import { Input } from '../../ui/Input'
@@ -10,6 +11,8 @@ import { IDataUser, formatName, isValidDataUser } from './EntryFunctions'
  */
 export default function SignUp() {
    const [isConfirmation, setIsConfirmation] = useState<boolean>(false)
+
+   const router = useRouter()
 
    const trySignUp = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
@@ -42,11 +45,12 @@ export default function SignUp() {
       const formData = new FormData(e.currentTarget)
       const code = formData.get('code')
       const id = getCookie('interim_id')
-      console.log(id)
 
-      createFetch('api/user/confirm', { id: getCookie('interim_id'), code })
+      createFetch('api/user/confirm', { id, code })
          .then((res) => {
-            console.log(res.data)
+            setCookie('user_id', res.data)
+            deleteCookie('interim_id')
+            router.push('/profile')
          })
          .catch((e) => {
             console.log(e)
