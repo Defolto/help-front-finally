@@ -1,4 +1,5 @@
-import { closeDB, createData, openDB } from '../../../../mongoDB/general'
+import { getRandom } from '../../../../helpers/functions'
+import { closeDB, createData, createError, openDB } from '../../../../mongoDB/general'
 import Candidate from '../../../../mongoDB/models/candidate'
 import { ICandidate } from '../../../../types'
 
@@ -8,6 +9,15 @@ type IUserCreated = {
    email: string
    login: string
    password: string
+}
+
+function createPassword(size: number) {
+   let code = ''
+   for (let i = 0; i < size; i++) {
+      code += getRandom(0, 9)
+   }
+
+   return code
 }
 
 export async function POST(req: Request) {
@@ -20,6 +30,7 @@ export async function POST(req: Request) {
          login,
          email,
          password,
+         confirmCode: createPassword(4),
          info: {
             name,
             surname,
@@ -32,6 +43,6 @@ export async function POST(req: Request) {
       await closeDB()
       return Response.json(createData(newUser.get('_id')))
    } catch (e) {
-      console.log('Ошибка регистрации', e)
+      return Response.json(createError('Ошибка с базой данных'))
    }
 }

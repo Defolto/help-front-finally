@@ -7,16 +7,6 @@ import {
    REG_EXP_LOGIN,
    REG_EXP_RUS_WORD,
 } from '../../helpers/constants'
-import { getRandom } from '../../helpers/functions'
-
-function createPassword(size: number) {
-   let code = ''
-   for (let i = 0; i < size; i++) {
-      code += getRandom(0, 9)
-   }
-
-   return code
-}
 
 const candidateScheme = new Schema(
    {
@@ -40,7 +30,6 @@ const candidateScheme = new Schema(
       confirmCode: {
          type: String,
          required: true,
-         default: createPassword(4),
       },
       info: {
          name: {
@@ -53,22 +42,9 @@ const candidateScheme = new Schema(
             required: true,
             validate: (text: string) => REG_EXP_RUS_WORD.test(text),
          },
-         birthday: Date,
       },
-      personalization: {
-         avatar: String,
-         background: String,
-         status: String,
-         border: String,
-      },
-      collections: [
-         {
-            name: String,
-            values: [Number],
-         },
-      ],
    },
-   { versionKey: '_somethingElse' }
+   { versionKey: false }
 )
 
 // Настройка опций, чтобы поле идентификатора называлось 'id' вместо '_id'

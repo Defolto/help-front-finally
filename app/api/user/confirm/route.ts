@@ -1,5 +1,7 @@
-import { closeDB, createData, openDB } from '../../../../mongoDB/general'
+import { closeDB, createData, createError, openDB } from '../../../../mongoDB/general'
 import Candidate from '../../../../mongoDB/models/candidate'
+import User from '../../../../mongoDB/models/user'
+import { IUser } from '../../../../types'
 
 type IConfirmUser = {
    code: string
@@ -13,10 +15,30 @@ export async function POST(req: Request) {
       await openDB()
 
       const candidate = await Candidate.findOne({ _id: id })
+      const confirmCode = candidate.get('confirmCode')
+
+      if (confirmCode !== code) {
+         return Response.json(createError('Неправильный код'))
+      }
+
+      const newUser: IUser = {
+         login: candidate.get('login'),
+         email: candidate.get('email'),
+         password: candidate.get('password'),
+         confirmAccount: false,
+         info: {
+            name: candidate.get('name'),
+            surname: candidate.get('surname'),
+         },
+      }
+
+      const user = new User(newUser)
+      await user.save()
+      await Candidate.deleteOne({ _id: id })
 
       await closeDB()
-      return Response.json(createData(candidate.get('_id')))
+      return Response.json(createData(user.get('_id')))
    } catch (e) {
-      console.log('Ошибка регистрации', e)
+      return Response.json(createError('Ошибка с базой данных'))
    }
 }
