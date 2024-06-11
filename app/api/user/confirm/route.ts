@@ -27,8 +27,8 @@ export async function POST(req: Request) {
          password: candidate.get('password'),
          confirmAccount: false,
          info: {
-            name: candidate.get('name'),
-            surname: candidate.get('surname'),
+            name: candidate.get('info').name,
+            surname: candidate.get('info').surname,
          },
       }
 
