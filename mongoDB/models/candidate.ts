@@ -6,7 +6,7 @@ import {
    REG_EXP_EMAIL,
    REG_EXP_LOGIN,
    REG_EXP_RUS_WORD,
-} from '../../helpers/constants'
+} from 'helpers/constants'
 
 const candidateScheme = new Schema(
    {

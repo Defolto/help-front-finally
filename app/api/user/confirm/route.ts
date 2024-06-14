@@ -1,7 +1,7 @@
-import { closeDB, createData, createError, openDB } from '../../../../mongoDB/general'
-import Candidate from '../../../../mongoDB/models/candidate'
-import User from '../../../../mongoDB/models/user'
-import { IUser } from '../../../../types'
+import { closeDB, createData, createError, openDB } from 'mongoDB/general'
+import Candidate from 'mongoDB/models/candidate'
+import User from 'mongoDB/models/user'
+import { IUser } from 'types'
 
 type IConfirmUser = {
    code: string

@@ -1,5 +1,5 @@
-import {closeDB, createData, createError, openDB} from "../../../../mongoDB/general";
-import User from "../../../../mongoDB/models/user";
+import {closeDB, createData, createError, openDB} from "mongoDB/general";
+import User from "mongoDB/models/user";
 
 type IUser = {
     login: string,
