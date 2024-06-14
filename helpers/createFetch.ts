@@ -1,7 +1,7 @@
 /**
  * Создание фетч запроса
  */
-import { ALL_API } from '../app/api/names'
+import { ALL_API } from 'app/api/names'
 
 export type IDataFetch = {
    data?: any

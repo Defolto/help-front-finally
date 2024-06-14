@@ -1,7 +1,7 @@
-import { getRandom } from '../../../../helpers/functions'
-import { closeDB, createData, createError, openDB } from '../../../../mongoDB/general'
-import Candidate from '../../../../mongoDB/models/candidate'
-import { ICandidate } from '../../../../types'
+import { getRandom } from 'helpers/functions'
+import { closeDB, createData, createError, openDB } from 'mongoDB/general'
+import Candidate from 'mongoDB/models/candidate'
+import { ICandidate } from 'types'
 
 type IUserCreated = {
    name: string

@@ -1,8 +1,8 @@
 import { FormEvent } from 'react'
-import { createFetch } from '../../../helpers/createFetch'
+import { createFetch } from 'helpers/createFetch'
 import { Button } from '../../ui/Button'
 import { Input } from '../../ui/Input'
-import {deleteCookie, getCookie, setCookie} from "../../../helpers/cookie";
+import {setCookie} from "helpers/cookie";
 import {useRouter} from "next/navigation";
 
 /**
