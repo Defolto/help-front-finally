@@ -27,12 +27,12 @@ export async function POST(req: Request) {
    try {
       await openDB()
 
-      const user = await User.findOne({
-         $or: [{login: login}, {email: email}]
-      })
+      const userCheckEmail = await User.findOne({email: email})
+      const userCheckLogin = await User.findOne({login: email})
 
-      if (user != null){
-         return Response.json(createError("Ошибка! Такой пользователь уже существует"))
+      if (userCheckEmail != null || userCheckLogin != null){
+         const reasonError = userCheckEmail == null ? "таким логином" : "такой почтой"
+         return Response.json(createError(`Ошибка! Пользователь с ${reasonError} уже существует`))
       }
 
       const candidate: ICandidate = {

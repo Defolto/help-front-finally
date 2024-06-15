@@ -19,7 +19,6 @@ export async function POST(req: Request){
 
         return Response.json(createData(user.get('_id')))
     }catch (e){
-        console.log(e)
         return Response.json(createError('Ошибка с базой данных'))
     }
 }
