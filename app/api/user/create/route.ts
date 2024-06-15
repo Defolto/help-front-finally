@@ -2,6 +2,7 @@ import { getRandom } from 'helpers/functions'
 import { closeDB, createData, createError, openDB } from 'mongoDB/general'
 import Candidate from 'mongoDB/models/candidate'
 import { ICandidate } from 'types'
+import User from "../../../../mongoDB/models/user";
 
 type IUserCreated = {
    name: string
@@ -25,6 +26,14 @@ export async function POST(req: Request) {
 
    try {
       await openDB()
+
+      const user = await User.findOne({
+         $or: [{login: login}, {email: email}]
+      })
+
+      if (user != null){
+         return Response.json(createError("Ошибка! Такой пользователь уже существует"))
+      }
 
       const candidate: ICandidate = {
          login,
