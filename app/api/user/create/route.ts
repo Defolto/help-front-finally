@@ -2,6 +2,7 @@ import { getRandom } from 'helpers/functions'
 import { closeDB, createData, createError, openDB } from 'mongoDB/general'
 import Candidate from 'mongoDB/models/candidate'
 import { ICandidate } from 'types'
+import User from "../../../../mongoDB/models/user";
 
 type IUserCreated = {
    name: string
@@ -25,6 +26,13 @@ export async function POST(req: Request) {
 
    try {
       await openDB()
+
+      const userCheck = await User.findOne({$or: [{login}, {email}],})
+
+      if (!userCheck){
+         const reasonError = userCheck.get("login") == login ? "таким логином" : "такой почтой"
+         return Response.json(createError(`Ошибка! Пользователь с ${reasonError} уже существует`))
+      }
 
       const candidate: ICandidate = {
          login,
