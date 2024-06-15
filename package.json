@@ -8,12 +8,14 @@
     "start": "ts-node server.ts"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.5",
     "mongoose": "^8.4.1",
     "next": "14.2.3",
     "nodemailer": "^6.9.13",
     "nodemon": "^3.1.2",
     "react": "^18",
     "react-dom": "^18",
+    "react-redux": "^9.1.2",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {

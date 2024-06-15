@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { StoreProvider } from '../../store/StoreProvider'
 
 export const metadata: Metadata = {
    title: 'HelpFront | Профиль',
@@ -10,5 +11,5 @@ export default function RootLayout({
 }: Readonly<{
    children: React.ReactNode
 }>) {
-   return <div>{children}</div>
+   return <StoreProvider>{children}</StoreProvider>
 }

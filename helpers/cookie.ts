@@ -1,13 +1,12 @@
-// возвращает куки с указанным name,
-// или undefined, если ничего не найдено
-export function getCookie(name: string) {
+type INameCookie = 'user_id' | 'interim_id'
+export function getCookie(name: INameCookie) {
    let matches = document.cookie.match(
       new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
    )
    return matches ? decodeURIComponent(matches[1]) : undefined
 }
 
-export function setCookie(name: string, value: string, options = {}) {
+export function setCookie(name: INameCookie, value: string, options = {}) {
    options = {
       path: '/',
       // при необходимости добавьте другие значения по умолчанию
@@ -33,7 +32,7 @@ export function setCookie(name: string, value: string, options = {}) {
    document.cookie = updatedCookie
 }
 
-export function deleteCookie(name: string) {
+export function deleteCookie(name: INameCookie) {
    setCookie(name, '', {
       'max-age': -1,
    })
