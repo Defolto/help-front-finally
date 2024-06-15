@@ -27,8 +27,8 @@ export async function POST(req: Request) {
    try {
       await openDB()
 
-      const userCheckEmail = await User.findOne({email: email})
-      const userCheckLogin = await User.findOne({login: email})
+      const userCheckEmail = await User.findOne({email})
+      const userCheckLogin = await User.findOne({login})
 
       if (userCheckEmail != null || userCheckLogin != null){
          const reasonError = userCheckEmail == null ? "таким логином" : "такой почтой"
