@@ -1,10 +1,14 @@
 import { useRouter } from 'next/navigation'
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { deleteCookie, getCookie, setCookie } from 'helpers/cookie'
 import { createFetch } from 'helpers/createFetch'
 import { Button } from '../../ui/Button'
 import { Input } from '../../ui/Input'
 import { IDataUser, formatName, isValidDataUser } from './EntryFunctions'
+import { CODE_LENGTH, REG_EXP_NUMBER } from 'helpers/constants'
+import {useKeyboard} from 'store/keyboard'
+import { getMass } from 'helpers/functions'
+
 
 /**
  * Компонент регистрации
@@ -13,6 +17,8 @@ export default function SignUp() {
    const [isConfirmation, setIsConfirmation] = useState<boolean>(false)
 
    const router = useRouter()
+   const [codeConfirm, setCodeConfirm] = useState<string[]>([]);
+   const keyboard = useKeyboard()
 
    const trySignUp = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
@@ -42,9 +48,12 @@ export default function SignUp() {
    const confirmCode = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
 
-      const formData = new FormData(e.currentTarget)
-      const code = formData.get('code')
+      const code = codeConfirm.join("");
       const id = getCookie('interim_id')
+
+      if (code.length !== 4){
+         return;
+      }
 
       createFetch('api/user/confirm', { id, code })
          .then((res) => {
@@ -60,6 +69,28 @@ export default function SignUp() {
    const handleChangeName = (e: any) => {
       e.target.value = formatName(e.target.value)
    }
+
+   useEffect(()=>{
+      if (!keyboard){
+         return
+      }
+
+      const {key} = keyboard
+      let items = codeConfirm.slice()
+
+      // добавили букву
+      if (REG_EXP_NUMBER.test(key) && codeConfirm.length < CODE_LENGTH){
+         items.push(key)
+      }
+
+      // удаление буквы
+      if (key == "Backspace"){
+         items.pop()
+      }
+
+      setCodeConfirm(items)
+
+   }, [keyboard])
 
    return (
       <>
@@ -98,7 +129,15 @@ export default function SignUp() {
             </form>
          ) : (
             <form className="flex flex-col" onSubmit={confirmCode}>
-               <Input view="entry" type="number" placeholder="Код с почты" name="code" />
+               <p className="text-center text-white text-xl font-bold">Введите код с почты</p>
+               <div className="flex">
+                  {getMass(CODE_LENGTH).map((_, col) => {
+                     return <div key={`code-key-${col}`}
+                                 className="w-[50px] h-[50px] m-[5px] bg-white flex items-center justify-center text-xl font-bold">
+                        {codeConfirm[col]}
+                     </div>
+                  })}
+               </div>
                <Button className="mx-auto mt-3 px-10" type="submit">
                   Подтвердить
                </Button>
