@@ -12,4 +12,4 @@ export const REG_EXP_RUS_WORD = /^[А-Я][а-яё]*$/
 
 export const REG_EXP_NUMBER = /^[0-9]*$/
 
-export const CODE_COLUMN = 4;
+export const CODE_LENGTH = 4;

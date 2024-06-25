@@ -5,11 +5,10 @@ import { createFetch } from 'helpers/createFetch'
 import { Button } from '../../ui/Button'
 import { Input } from '../../ui/Input'
 import { IDataUser, formatName, isValidDataUser } from './EntryFunctions'
-import { CODE_COLUMN, REG_EXP_NUMBER } from 'helpers/constants'
+import { CODE_LENGTH, REG_EXP_NUMBER } from 'helpers/constants'
 import {useKeyboard} from 'store/keyboard'
-function getMass(length: number) {
-   return new Array(length).fill(0)
-}
+import { getMass } from 'helpers/functions'
+
 
 /**
  * Компонент регистрации
@@ -18,7 +17,7 @@ export default function SignUp() {
    const [isConfirmation, setIsConfirmation] = useState<boolean>(false)
 
    const router = useRouter()
-   const [texts, setTexts] = useState<string[]>([]);
+   const [codeConfirm, setCodeConfirm] = useState<string[]>([]);
    const keyboard = useKeyboard()
 
    const trySignUp = (e: FormEvent<HTMLFormElement>) => {
@@ -49,10 +48,10 @@ export default function SignUp() {
    const confirmCode = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault()
 
-      const code = texts.join("");
+      const code = codeConfirm.join("");
       const id = getCookie('interim_id')
 
-      if (code.length > 4){
+      if (code.length !== 4){
          return;
       }
 
@@ -77,10 +76,10 @@ export default function SignUp() {
       }
 
       const {key} = keyboard
-      let items = texts.slice()
+      let items = codeConfirm.slice()
 
       // добавили букву
-      if (REG_EXP_NUMBER.test(key) && texts.length < CODE_COLUMN){
+      if (REG_EXP_NUMBER.test(key) && codeConfirm.length < CODE_LENGTH){
          items.push(key)
       }
 
@@ -89,7 +88,7 @@ export default function SignUp() {
          items.pop()
       }
 
-      setTexts(items)
+      setCodeConfirm(items)
 
    }, [keyboard])
 
@@ -132,10 +131,10 @@ export default function SignUp() {
             <form className="flex flex-col" onSubmit={confirmCode}>
                <p className="text-center text-white text-xl font-bold">Введите код с почты</p>
                <div className="flex">
-                  {getMass(CODE_COLUMN).map((_, col) => {
-                     return <div key={col}
+                  {getMass(CODE_LENGTH).map((_, col) => {
+                     return <div key={`code-key-${col}`}
                                  className="w-[50px] h-[50px] m-[5px] bg-white flex items-center justify-center text-xl font-bold">
-                        {texts[col]}
+                        {codeConfirm[col]}
                      </div>
                   })}
                </div>
