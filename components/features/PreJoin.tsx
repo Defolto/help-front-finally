@@ -16,7 +16,7 @@ export default function PreJoin() {
          .catch((e) => {
             console.log(e)
          })
-   }, [])
+   }, [dispatch])
 
    return null
 }
