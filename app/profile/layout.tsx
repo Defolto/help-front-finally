@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import UserMenu from '../../components/features/UserMenu'
+import UserMenu from '../../components/features/UserMenu/UserMenu'
 import { StoreProvider } from '../../store/StoreProvider'
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export default function RootLayout({
    children: React.ReactNode
 }>) {
    return (
-      <div className="flex flex-row">
+      <div className="flex h-full flex-row">
          <StoreProvider>
             <UserMenu />
             {children}
