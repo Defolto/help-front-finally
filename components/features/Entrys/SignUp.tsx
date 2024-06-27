@@ -136,20 +136,20 @@ export default function SignUp() {
             </form>
          ) : (
             <form
-               className="flex flex-col"
+               className="flex w-[300px] flex-col"
                onSubmit={(e: FormEvent<HTMLFormElement>) => {
                   e.preventDefault()
                   confirmCode(codeConfirm.join(''))
                }}
             >
                <p className="text-center text-xl font-bold text-white">Введите код с почты</p>
-               <div className="flex">
+               <div className="mx-auto my-2 flex gap-2">
                   {getMass(CODE_LENGTH).map((_, col) => {
                      const currentCol = codeConfirm.length === col
                      return (
                         <div
                            key={`code-key-${col}`}
-                           className={`m-[5px] box-border flex h-[50px] w-[50px] items-center justify-center bg-white text-xl font-bold ${currentCol ? 'border-3 cursor-pointer border-solid border-green-500' : ''}`}
+                           className={`box-border flex h-[50px] w-[50px] items-center justify-center bg-white text-xl font-bold ${currentCol ? 'border-3 cursor-pointer border-solid border-green-500' : ''}`}
                         >
                            {currentCol ? (
                               <span className="animation-blink font-medium">|</span>
