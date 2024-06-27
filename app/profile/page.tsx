@@ -1,5 +1,13 @@
 'use client'
 
+import { useAppSelector } from '../../store/hooks'
+
 export default function Home() {
-   return <span>Привет, главная страница</span>
+   const { info } = useAppSelector((state) => state.user)
+
+   return (
+      <span>
+         Привет, {info.name} {info.surname}
+      </span>
+   )
 }

@@ -13,7 +13,7 @@ import { IDataUser, formatName, isValidDataUser } from './EntryFunctions'
  * Компонент регистрации
  */
 export default function SignUp() {
-   const [isConfirmation, setIsConfirmation] = useState<boolean>(true)
+   const [isConfirmation, setIsConfirmation] = useState<boolean>(false)
 
    const router = useRouter()
    const [codeConfirm, setCodeConfirm] = useState<string[]>([])

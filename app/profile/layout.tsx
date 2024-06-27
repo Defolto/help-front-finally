@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import UserMenu from '../../components/features/UserMenu'
 import { StoreProvider } from '../../store/StoreProvider'
 
 export const metadata: Metadata = {
@@ -11,5 +12,12 @@ export default function RootLayout({
 }: Readonly<{
    children: React.ReactNode
 }>) {
-   return <StoreProvider>{children}</StoreProvider>
+   return (
+      <div className="flex flex-row">
+         <StoreProvider>
+            <UserMenu />
+            {children}
+         </StoreProvider>
+      </div>
+   )
 }

@@ -7,7 +7,7 @@ export default function Home() {
          <section className="flex h-screen w-full max-w-screen-2xl justify-around">
             <MainAnimation />
             <div className="my-auto">
-               <h1 className="text-4xl font-bold">Электронный журнал альфа поколения</h1>
+               <h1 className="text-4xl font-bold text-black">Электронный журнал альфа поколения</h1>
                <h2 className="text-xl font-light text-white">Стильно, удобно, ахуенно</h2>
             </div>
             <Entry />
