@@ -9,7 +9,7 @@ export default function Entry() {
    const [entry, setEntry] = useState<boolean>(true)
 
    return (
-      <div className="my-auto flex flex-col bg-black/40 p-6">
+      <div className="my-auto flex flex-col rounded-lg bg-black/40 p-6">
          <p className="mb-3 text-center text-2xl font-bold text-white">
             {entry ? 'Авторизация' : 'Регистрация'}
          </p>
