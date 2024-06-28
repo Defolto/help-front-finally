@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import UserMenu from '../../components/features/UserMenu/UserMenu'
 
 export const metadata: Metadata = {
    title: 'HelpFront | Предметы',
@@ -10,5 +11,10 @@ export default function RootLayout({
 }: Readonly<{
    children: React.ReactNode
 }>) {
-   return <>{children}</>
+   return (
+      <div className="flex h-full flex-row">
+         <UserMenu />
+         {children}
+      </div>
+   )
 }
