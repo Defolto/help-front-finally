@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import UserMenu from '../../components/features/UserMenu/UserMenu'
+import WrapperContent from '../../components/features/WrapperContent'
 import { StoreProvider } from '../../store/StoreProvider'
 
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ export default function RootLayout({
       <div className="flex h-full flex-row">
          <StoreProvider>
             <UserMenu />
-            {children}
+            <WrapperContent>{children}</WrapperContent>
          </StoreProvider>
       </div>
    )
