@@ -1,3 +1,3 @@
 export default function Home() {
-   return <span>Тут будет справочник</span>
+   return <div className="flex flex-col">Нужно выбрать предмет</div>
 }

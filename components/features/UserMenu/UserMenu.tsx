@@ -1,7 +1,8 @@
 'use client'
 
 import clsx from 'clsx'
-import { usePathname, useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import Calendar from './icons/Calendar'
 import Collections from './icons/Collections'
 import Home from './icons/Home'
@@ -28,19 +29,20 @@ const MENU_ITEMS: IMenuItem[] = [
 
 function UserMenuItem({ title, icon, href }: IMenuItem) {
    const pathname = usePathname()
-   const route = useRouter()
+   // В материалах может быть вложенный путь
+   const isMaterials = pathname.includes('materials') && href.includes('materials')
 
    return (
-      <div
+      <Link
+         href={href}
          className={clsx(
-            'flex cursor-pointer flex-row items-center gap-2 hover:text-green',
-            pathname === href && 'text-green'
+            'flex cursor-pointer flex-row items-center gap-2 text-white no-underline hover:text-green',
+            (pathname === href || isMaterials) && '!text-green'
          )}
-         onClick={() => route.push(href)}
       >
          {icon}
          <p>{title}</p>
-      </div>
+      </Link>
    )
 }
 
