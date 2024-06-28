@@ -17,12 +17,12 @@ export async function createFetch(api: ALL_API, data: any): Promise<IDataFetch> 
       body: JSON.stringify({
          ...data,
       }),
-   }).then((res) => {
+   }).then(async (res) => {
       if (res.status !== 200) {
          throw new Error('Сбой бэкенда')
       }
 
-      const data = res.json() as IDataFetch
+      const data = (await res.json()) as IDataFetch
       if (data.error) {
          throw new Error(data.error)
       }

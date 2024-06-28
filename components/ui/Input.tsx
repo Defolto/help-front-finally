@@ -20,7 +20,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
                className={clsx(
                   className,
                   'border-0 outline-0',
-                  view === 'entry' && 'box-border w-[300px] px-2 py-1 text-lg'
+                  view === 'entry' && 'box-border w-[300px] rounded-md px-2 py-1 text-lg'
                )}
                ref={ref}
                type={localType}
