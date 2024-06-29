@@ -71,7 +71,7 @@ export default function SignUp() {
    }
 
    useEffect(() => {
-      if (!keyboard) {
+      if (!keyboard || !isConfirmation) {
          return
       }
 
@@ -97,7 +97,7 @@ export default function SignUp() {
 
          return items
       })
-   }, [keyboard, confirmCode])
+   }, [keyboard, confirmCode, isConfirmation])
 
    return (
       <>
@@ -143,7 +143,7 @@ export default function SignUp() {
                }}
             >
                <p className="text-center text-xl font-bold text-white">Введите код с почты</p>
-               <div className="mx-auto my-2 flex gap-2">
+               <div className="mx-auto my-2 flex gap-2 text-black">
                   {getMass(CODE_LENGTH).map((_, col) => {
                      const currentCol = codeConfirm.length === col
                      return (

@@ -29,7 +29,7 @@ export async function POST(req: Request) {
 
       const userCheck = await User.findOne({$or: [{login}, {email}],})
 
-      if (!userCheck){
+      if (userCheck){
          const reasonError = userCheck.get("login") == login ? "таким логином" : "такой почтой"
          return Response.json(createError(`Ошибка! Пользователь с ${reasonError} уже существует`))
       }
