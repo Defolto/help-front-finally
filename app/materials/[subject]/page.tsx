@@ -18,11 +18,11 @@ async function getThemes(subjectName: string): Promise<ThemeElement[]>{
    await openDB();
 
    const subject = await Subject.findOne({ title: subjectName });
+   await closeDB();
+
    if (!subject){
       return []
    }
-
-   await closeDB();
 
    return subject["themes"]
 }
