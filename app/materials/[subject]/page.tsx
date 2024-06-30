@@ -4,7 +4,7 @@ type Props = {
    }
 }
 
+
 export default async function Theme({ params: { subject } }: Props) {
-   // Тут отображаем главный md файл предмета. Внутри файла должны быть ссылки на темы
-   return <div>{subject}</div>
+   return <div className="flex flex-col">{subject}</div>
 }
