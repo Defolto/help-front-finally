@@ -9,7 +9,7 @@ type IMenuItem = {
 const MENU_ITEMS: IMenuItem[] = [
    {
       name: 'Frontend (теория)',
-      href: 'frontend-theory',
+      href: 'frontend-frontend-theory',
    },
    {
       name: 'Frontend (практика)',
@@ -17,7 +17,7 @@ const MENU_ITEMS: IMenuItem[] = [
    },
    {
       name: 'Backend (теория)',
-      href: 'backend-theory',
+      href: 'backend-frontend-theory',
    },
    {
       name: 'Backend (практика)',
@@ -25,7 +25,7 @@ const MENU_ITEMS: IMenuItem[] = [
    },
    {
       name: 'Figma  (теория)',
-      href: 'figma-theory',
+      href: 'figma-frontend-theory',
    },
    {
       name: 'Figma  (практика)',
