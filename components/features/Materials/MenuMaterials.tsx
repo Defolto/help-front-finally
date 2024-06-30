@@ -9,7 +9,7 @@ type IMenuItem = {
 const MENU_ITEMS: IMenuItem[] = [
    {
       name: 'Frontend (теория)',
-      href: 'frontend-frontend-theory',
+      href: 'frontend-theory',
    },
    {
       name: 'Frontend (практика)',
