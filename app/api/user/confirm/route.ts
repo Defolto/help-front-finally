@@ -30,6 +30,7 @@ export async function POST(req: Request) {
             name: candidate.get('info').name,
             surname: candidate.get('info').surname,
          },
+         money: 0,
       }
 
       const user = new User(newUser)
