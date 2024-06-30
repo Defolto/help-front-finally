@@ -1,5 +1,6 @@
 'use client'
 
+import Hello from '../../components/features/Hello'
 import { useAppSelector } from '../../store/hooks'
 
 export default function Home() {
@@ -7,7 +8,7 @@ export default function Home() {
 
    return (
       <span>
-         Привет, {info.name} {info.surname}
+         <Hello />, {info.name} {info.surname}
       </span>
    )
 }

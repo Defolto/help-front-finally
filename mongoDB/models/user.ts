@@ -1,4 +1,3 @@
-import mongoose, { Schema } from 'mongoose'
 import {
    MAX_LENGTH_LOGIN,
    MIN_LENGTH_LOGIN,
@@ -7,6 +6,7 @@ import {
    REG_EXP_LOGIN,
    REG_EXP_RUS_WORD,
 } from 'helpers/constants'
+import mongoose, { Schema } from 'mongoose'
 
 const userScheme = new Schema(
    {
@@ -56,6 +56,15 @@ const userScheme = new Schema(
             values: [Number],
          },
       ],
+      money: {
+         type: Number,
+         required: true,
+         default: 0,
+      },
+      thanks: {
+         type: Number,
+         default: 0,
+      },
    },
    { versionKey: false }
 )

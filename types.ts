@@ -27,6 +27,7 @@ export type IUser = {
       surname: string
       birthday?: Date
    }
+   money: number
    personalization?: {
       avatar?: string
       background?: string
@@ -34,4 +35,5 @@ export type IUser = {
       border?: string
    }
    collections?: Record<string, number[]>
+   thanks?: number
 }
