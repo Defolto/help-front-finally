@@ -10,6 +10,7 @@ const initialState: Omit<IUser, 'password' | 'email'> = {
       name: '',
       surname: '',
    },
+   money: 0,
 }
 
 export const userSlice = createSlice({
@@ -17,10 +18,12 @@ export const userSlice = createSlice({
    initialState,
    reducers: {
       initUser: (state, action: PayloadAction<IUser>) => {
-         const { login, info, confirmAccount } = action.payload
+         const { login, info, confirmAccount, money, thanks } = action.payload
          state.login = login
          state.info = info
          state.confirmAccount = confirmAccount
+         state.money = money
+         state.thanks = thanks
       },
 
       exitUser: (state) => {},
