@@ -1,10 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
 
-type Theme = {
-    name: string,
-    href: string
-}
-
 const subjectScheme = new Schema(
     {
         title: {
