@@ -32,8 +32,7 @@ async function hasTheme(subjectName: string, themeName: string){
    await closeDB();
 
    const themesRaw: ThemeElement[] = await subject["themes"]
-   const themesFiltered = themesRaw.find(value => {return  value.href==themeName})
-   return themesFiltered != undefined;
+   return !!themesRaw.find(value => {return  value.href==themeName})
 }
 
 async function getMDText(subject: string, theme: string){
