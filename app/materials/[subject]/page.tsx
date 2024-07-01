@@ -36,8 +36,7 @@ async function getMainMDText(subject: string){
    }
    return await fs.readFile(`${process.cwd()}/materials/${subject}/main.md`, "utf8")
 }
-
-async function hasSubject(subject: string){
+ function hasSubject(subject: string){
    return existsSync(`${process.cwd()}/materials/${subject}`)
 }
 
@@ -45,7 +44,7 @@ async function hasSubject(subject: string){
 export default async function Theme({ params: { subject } }: Props) {
    const themes: ThemeElement[] = await getThemes(subject);
    const mainMDText = await getMainMDText(subject)
-   const hasElement = await hasSubject(subject)
+   const hasElement = hasSubject(subject)
    return <>
       <div className="flex-col">
          <div>
@@ -57,7 +56,7 @@ export default async function Theme({ params: { subject } }: Props) {
                    <p>Ошибка, предмет не найден!</p> :
                    <>
                       {themes.map((value, key) => {
-                         return <Link key={key} href={value.href} className="text-white text-xl">{value.name}</Link>
+                         return <Link key={key} href={`${subject}/${value.href}`} className="text-white text-xl">{value.name}</Link>
                       })}
                    </>
             }
