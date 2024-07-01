@@ -22,7 +22,7 @@ async function hasSubject(subjectName: string) {
    const subject = await Subject.findOne({title: subjectName});
    await closeDB();
 
-   return !subject
+   return subject
 }
 
 async function hasTheme(subjectName: string, themeName: string){
@@ -33,7 +33,7 @@ async function hasTheme(subjectName: string, themeName: string){
 
    const themesRaw: ThemeElement[] = await subject["themes"]
    const themesFiltered = themesRaw.find(value => {return  value.href==themeName})
-   return themesFiltered == undefined;
+   return themesFiltered != undefined;
 }
 
 async function getMDText(subject: string, theme: string){
@@ -50,11 +50,11 @@ export default async function Theme({ params: { subject, theme } }: Props) {
    const hasThemeElement = await hasTheme(subject, theme)
    const mdText = await getMDText(subject, theme)
    return <div>
-      {hasSubjectElement ?
+      {!hasSubjectElement ?
           <p>Ошибка предмет не найден</p> :
           <>
              {
-                hasThemeElement ?
+                !hasThemeElement ?
                     <p>Ошибка тема не найдена</p> :
                     <MDXRemote source={mdText}/>
              }
