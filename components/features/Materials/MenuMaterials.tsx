@@ -17,7 +17,7 @@ const MENU_ITEMS: IMenuItem[] = [
    },
    {
       name: 'Backend (теория)',
-      href: 'backend-frontend-theory',
+      href: 'backend-theory',
    },
    {
       name: 'Backend (практика)',
@@ -25,7 +25,7 @@ const MENU_ITEMS: IMenuItem[] = [
    },
    {
       name: 'Figma  (теория)',
-      href: 'figma-frontend-theory',
+      href: 'figma-theory',
    },
    {
       name: 'Figma  (практика)',

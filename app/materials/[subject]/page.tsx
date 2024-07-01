@@ -3,6 +3,7 @@ import Subject from "mongoDB/models/subject";
 import {MDXRemote} from 'next-mdx-remote/rsc'
 import {existsSync, promises as fs} from "fs";
 import * as process from "node:process";
+import Link from "next/link";
 
 type Props = {
    params: {
@@ -48,11 +49,7 @@ export default async function Theme({ params: { subject } }: Props) {
    return <>
       <div className="flex-col">
          <div>
-            {
-               !hasElement ?
-                   <></> :
-                   <MDXRemote source={mainMDText}/>
-            }
+             {hasElement && <MDXRemote source={mainMDText}/>}
          </div>
          <div className="flex flex-col">
             {
@@ -60,7 +57,7 @@ export default async function Theme({ params: { subject } }: Props) {
                    <p>Ошибка, предмет не найден!</p> :
                    <>
                       {themes.map((value, key) => {
-                         return <a key={key} href={value.href} className="text-white text-xl">{value.name}</a>
+                         return <Link key={key} href={value.href} className="text-white text-xl">{value.name}</Link>
                       })}
                    </>
             }
